@@ -1,0 +1,25 @@
+Use browser_action to launch a browser at the login page https://lms.chungbuk.ac.kr/login/index.php.
+Perform a comprehensive network analysis using the provided credentials (username: 2025278002, password: HeangP@$$12345). 
+
+After successful authentication, navigate to the Announcements section and click the "more" button to access all announcements. Then use Firecrawl mcp tool to scrape html structure via url: https://lms.chungbuk.ac.kr/mod/ubboard/view.php?id=17 and save it in html.txt. Using iSASTypes.js to handle error exception.
+
+Network Analysis:
+Use the announcement URL to extract the data and analyze all network requests, parameters, and form-data structures to understand the site's communication patterns.
+
+Then write the business logic implementation for the // __Business_Logic__ section, do not engage the // __DATA_EXTRACTION__  section in the newly created __WEBSITE_NAME__.js file:
+
+1. Locate the comment marker // __Business_Logic__ in the __WEBSITE_NAME__.js file
+2. Replace this marker with a complete implementation that follows the workflow.txt template pattern
+
+
+
+
+3. Implement authentication to the Chungbuk LMS system using the provided credentials
+4. Add navigation logic to access the Announcements section and click the "more" button
+5. Implement proper error handling for all possible scenarios (login failures, navigation issues)
+6. Add appropriate logging throughout the implementation
+7. Format the extracted data according to the expected output structure
+
+Your implementation should handle all the authentication and data extraction requirements while maintaining the module's structure and style conventions.
+
+

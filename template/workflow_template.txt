@@ -1,0 +1,45 @@
+/**
+ * Login Request Information
+ * 
+ * This format example of form data request is for a login form submission taking from network idenfication after submission.
+ * 
+ */
+        __Business_Logic__
+        var input = dec(aInput.Input);
+
+        var username = input.username;  // account number
+        var password = input.password; // account password
+
+
+        this.url = "/quics?page=C025255&cc=b028364:b028702&QSL=F";
+        if (!httpRequest.get(this.host + this.url)) {
+            this.setError(E_IBX_FAILTOGETPAGE);
+            return E_IBX_FAILTOGETPAGE;
+        }
+        var ResultStr = httpRequest.result;
+        this.log("Login Page URL: [" + this.host + this.url + "]");
+        this.log("Login Page Content: [" + ResultStr.substring(0, 200) + "...]");
+
+        // Step 2: Prepare form data for login POST request
+        this.postData = "";
+        this.postData += httpRequest.URLEncode("계좌번호", "UTF-8") + "=" + httpRequest.URLEncode(username, "UTF-8");
+        this.postData += "&" + httpRequest.URLEncode("계좌비밀번호", "UTF-8") + "=" + httpRequest.URLEncode(password, "UTF-8");
+        this.postData += "&" + httpRequest.URLEncode("사업자번호", "UTF-8") + "=" + httpRequest.URLEncode(birthdate, "UTF-8");
+        this.postData += "&" + httpRequest.URLEncode("조회유형", "UTF-8") + "=" + httpRequest.URLEncode("사업자번호", "UTF-8");
+
+        // Step 3: Send POST request to login
+        if (!httpRequest.post(this.host + this.url, this.postData, "application/x-www-form-urlencoded")) {
+            this.setError(E_IBX_FAILTOGETPAGE);
+            return E_IBX_FAILTOGETPAGE;
+        }
+
+        // Step 4: Capture the current URL after login
+        var currentUrl = this.host + this.url;
+        this.url = "/quics?page=C025255&cc=b028364:b028702&QSL=F#CP";
+        if (!httpRequest.get(this.host + this.url)) {
+            this.setError(E_IBX_FAILTOGETPAGE);
+            return E_IBX_FAILTOGETPAGE;
+        }
+        this.log("Current URL after login: [" + currentUrl + "]");
+        
+        ResultStr = httpRequest.result;

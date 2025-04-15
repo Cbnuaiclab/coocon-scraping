@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "firecrawl-mcp": {
+      "command": "cmd.exe",
+      "args": [
+        "/c",
+        "C:\\Program Files\\nodejs\\npx.cmd",
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-464ae6dcc5894cc18602b339b8ededc1"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+/**
+ * Login Request Information
+ * 
+ * This format example of form data request is for a login form submission taking from network idenfication after submission.
+ * 
+ */
+        __DATA_EXTRACTION_AND_CLEANING__
+        // Prepare the output
+        this.iSASInOut.Output = {};
+        this.iSASInOut.Output.ErrorCode = "00000000";
+        this.iSASInOut.Output.ErrorMessage = "";
+        this.iSASInOut.Output.Result = {};
+
+        // Extract application information from the result based on the html structure that received from **ResultStr**
+        this.iSASInOut.Output.Result.url = this.host + this.url;
+        this.iSASInOut.Output.Result.postData = this.postData;
+
+        // name
+        this.iSASInOut.Output.Result.name = StrGrab(StrGrab(ResultStr, ">name<", "</tr>"), "<td", "</td>"); 
+        this.iSASInOut.Output.Result.name = StrGrab(this.iSASInOut.Output.Result.예금명, ">", ""); // Remove ">" and "<"
+
+        //appNumber
+        this.iSASInOut.Output.Result.appNumber = StrGrab(StrGrab(ResultStr, ">appNumber<", "</tr>"), "<td", "</td>"); 
+        this.iSASInOut.Output.Result.appNumber = StrGrab(this.iSASInOut.Output.Result.appNumber, ">", ""); // Remove ">" and "<"
+        this.iSASInOut.Output.Result.appNumber = StrGrab(this.iSASInOut.Output.Result.appNumber, "(", ")"); // Remove "(" and ")"
+        this.iSASInOut.Output.Result.appNumber = StrTrim(this.iSASInOut.Output.Result.appNumber);
+
+        // department
+        this.iSASInOut.Output.Result.department = StrGrab(StrGrab(StrGrab(Col_Block, '>department<', '</td>'), '<td', ''), '>', '');
+        this.iSASInOut.Output.Result.department = this.iSASInOut.Output.Result.department.replace(/[\s,]/g, ""); //Remove Space New Line and , 
+        this.iSASInOut.Output.Result.department = StrTrim(this.iSASInOut.Output.Result.department);// Remove Space New Line            return year + '-' + month + '-' + day;
+
+       
