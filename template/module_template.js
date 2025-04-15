@@ -1,6 +1,28 @@
 /* jshint -W107 */
 var moduleName = '__MODULE_NAME__';
 var moduleVersion = '__MODULE_VERSION__';
+console.log(moduleName + " 스크립트 호출됨.");
+console.log('Version: ' + moduleVersion);
+
+function iSASObject() {
+    console.log("iSASObject 생성자 호출");
+    this.iSASInOut = {};
+}
+
+iSASObject.prototype.log = function (logMsg) {
+    try {
+        SASLog("iSASObject.Log(" + logMsg + "\")");
+    } catch (e) {
+        console.log("iSASObject.Log(" + logMsg + "\")");
+    }
+};
+
+iSASObject.prototype.setError = function (errcode) {
+    this.iSASInOut.Output = {};
+    this.iSASInOut.Output.ErrorCode = errcode.toString(16).toUpperCase();
+    //TODO: 에러 메시지 가져오는 부분...
+    this.iSASInOut.Output.ErrorMessage = getCooconErrMsg(errcode.toString(16).toUpperCase());
+};
 
 var __CLASS_NAME__ = function () {
     //생성자
