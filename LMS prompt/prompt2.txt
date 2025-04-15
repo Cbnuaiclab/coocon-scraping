@@ -11,15 +11,3 @@ Then write the business logic implementation for the // __Business_Logic__ secti
 1. Locate the comment marker // __Business_Logic__ in the __WEBSITE_NAME__.js file
 2. Replace this marker with a complete implementation that follows the workflow.txt template pattern
 
-
-
-
-3. Implement authentication to the Chungbuk LMS system using the provided credentials
-4. Add navigation logic to access the Announcements section and click the "more" button
-5. Implement proper error handling for all possible scenarios (login failures, navigation issues)
-6. Add appropriate logging throughout the implementation
-7. Format the extracted data according to the expected output structure
-
-Your implementation should handle all the authentication and data extraction requirements while maintaining the module's structure and style conventions.
-
-
