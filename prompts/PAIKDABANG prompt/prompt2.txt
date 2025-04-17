@@ -1,6 +1,7 @@
-Use browser_action to launch a browser at the login page https://www.coocon.net.
+Use browser_action to launch a browser at the login page https://paikdabang.com.
 
-Click on "데이터 API" card to access all cases. Then use Firecrawl mcp tool to scrape the API product lists from https://www.coocon.net/main_1002_01.act?CATG_SRNO=KOR_001_101_000 with the actual html structure only with main content as the context
+Scroll down a bit and Click on the "FRESH COFFEE" image. 
+Then use Firecrawl mcp tool to scrape the all the menu information from with the actual html structure, **exclude footer and navbar, only with main content as the context**.
 
 Network Analysis:
 Use the announcement URL to extract the data and analyze all network requests, parameters, and form-data structures to understand the site's communication patterns.

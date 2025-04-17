@@ -1,0 +1,8 @@
+Implement the data extraction and cleaning functionality for the // __DATA_EXTRACTION__ section in the __WEBSITE_NAME__.js file:
+
+1. Locate the comment marker // __DATA_EXTRACTION__ in the __WEBSITE_NAME__.js file
+2. Use the data_extraction_template.txt file as the pattern for your implementation
+3. From the HTML content to extract the following information from list of card:
+   - Coffee name
+
+Your implementation should follow the extraction pattern shown in data_extraction_template.txt while adapting it to handle the specific structure of the HTML. The extracted data should be clean, consistent, and properly structured for further processing.
