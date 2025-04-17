@@ -250,153 +250,153 @@ var 빠른조회 = function() {
         ResultStr = httpRequest.result;
         this.log("result: [" + ResultStr + "]");
 
-        /*{
-            "[계좌번호] 값은 필수항목 입니다" 오전 9시 이전 조회시 국민은행 사이트 장애로 재통신 로직 추가.
-            재통신 후에도 동일한 오류 발생시 서버오류처리함(80002F30)
-        }*/
-        if (StrGrab(ResultStr, 'id="errCd">', '</').indexOf('CBN13000') >= 0) {
-            if (!httpRequest.post(this.host + this.url, this.postData)) {
-                this.setError(E_IBX_FAILTOGETPAGE);
-                return E_IBX_FAILTOGETPAGE;
-            }
-            ResultStr = httpRequest.result;
-            this.log("result_re: [" + ResultStr + "]");
-        }
+        // /*{
+        //     "[계좌번호] 값은 필수항목 입니다" 오전 9시 이전 조회시 국민은행 사이트 장애로 재통신 로직 추가.
+        //     재통신 후에도 동일한 오류 발생시 서버오류처리함(80002F30)
+        // }*/
+        // if (StrGrab(ResultStr, 'id="errCd">', '</').indexOf('CBN13000') >= 0) {
+        //     if (!httpRequest.post(this.host + this.url, this.postData)) {
+        //         this.setError(E_IBX_FAILTOGETPAGE);
+        //         return E_IBX_FAILTOGETPAGE;
+        //     }
+        //     ResultStr = httpRequest.result;
+        //     this.log("result_re: [" + ResultStr + "]");
+        // }
 
-        // Error check
-        if (ResultStr.indexOf('조회가능한 예금종류가 아닙니다') >= 0) {
-            this.setError(E_IBX_ACCOUNT_NO_WRITEONLY);
-            return E_IBX_ACCOUNT_NO_WRITEONLY;
-        }
+        // // Error check
+        // if (ResultStr.indexOf('조회가능한 예금종류가 아닙니다') >= 0) {
+        //     this.setError(E_IBX_ACCOUNT_NO_WRITEONLY);
+        //     return E_IBX_ACCOUNT_NO_WRITEONLY;
+        // }
 
-        if ((ResultStr.indexOf("해당계좌는 빠른서비스 조회계좌로 등록되지않았습니다") >= 0) ||
-            (ResultStr.indexOf("해당 계좌는 빠른조회 서비스 이용계좌로 등록되지 않았습니다") >= 0) ||
-            (ResultStr.indexOf("빠른조회서비스 미등록 계좌입니다") >= 0) ||
-            (ResultStr.indexOf("해당계좌는 빠른서비스 조회계좌 이미해지되었습니다") >= 0)) {
-            this.setError(E_IBX_SERVICE_DENIED_2);
-            return E_IBX_SERVICE_DENIED_2;
-        }
-        if ((ResultStr.indexOf("입력한 계좌번호는 존재하지") >= 0) ||
-            (ResultStr.indexOf("계좌번호가일치하지않읍니다") >= 0) ||
-            (ResultStr.indexOf("계좌번호가 일치하지 않습니다") >= 0) ||
-            (ResultStr.indexOf("계좌번호 입력 오류입니다.") >= 0) ||
-            (ResultStr.indexOf("계좌번호 오류입니다") >= 0) ||
-            (ResultStr.indexOf("계좌번호가 빠른조회서비스에 등록되어 있지 않습니다") >= 0) ||
-            (ResultStr.indexOf("이용이 불가능한 계좌이거나 메뉴선택이 잘못 되었습니다") >= 0) ||
-            (ResultStr.indexOf("올바른 계좌번호를 입력하여 주십시오") >= 0) ||
-            (ResultStr.indexOf("계좌번호 확인 후 거래하여") >= 0) ||
-            (ResultStr.indexOf("계좌번호가 잘못 입력되었습니다") >= 0)) {
-            this.setError(E_IBX_ACCOUNT_NO_INVALID);
-            return E_IBX_ACCOUNT_NO_INVALID;
-        }
+        // if ((ResultStr.indexOf("해당계좌는 빠른서비스 조회계좌로 등록되지않았습니다") >= 0) ||
+        //     (ResultStr.indexOf("해당 계좌는 빠른조회 서비스 이용계좌로 등록되지 않았습니다") >= 0) ||
+        //     (ResultStr.indexOf("빠른조회서비스 미등록 계좌입니다") >= 0) ||
+        //     (ResultStr.indexOf("해당계좌는 빠른서비스 조회계좌 이미해지되었습니다") >= 0)) {
+        //     this.setError(E_IBX_SERVICE_DENIED_2);
+        //     return E_IBX_SERVICE_DENIED_2;
+        // }
+        // if ((ResultStr.indexOf("입력한 계좌번호는 존재하지") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호가일치하지않읍니다") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호가 일치하지 않습니다") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호 입력 오류입니다.") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호 오류입니다") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호가 빠른조회서비스에 등록되어 있지 않습니다") >= 0) ||
+        //     (ResultStr.indexOf("이용이 불가능한 계좌이거나 메뉴선택이 잘못 되었습니다") >= 0) ||
+        //     (ResultStr.indexOf("올바른 계좌번호를 입력하여 주십시오") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호 확인 후 거래하여") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호가 잘못 입력되었습니다") >= 0)) {
+        //     this.setError(E_IBX_ACCOUNT_NO_INVALID);
+        //     return E_IBX_ACCOUNT_NO_INVALID;
+        // }
 
-        if (ResultStr.indexOf("이용이불가능한계좌") >= 0) {
-            this.setError(E_IBX_USER_ACCOUNT_DENIED);
-            return E_IBX_USER_ACCOUNT_DENIED;
-        }
+        // if (ResultStr.indexOf("이용이불가능한계좌") >= 0) {
+        //     this.setError(E_IBX_USER_ACCOUNT_DENIED);
+        //     return E_IBX_USER_ACCOUNT_DENIED;
+        // }
 
-        if ((ResultStr.indexOf("본인의 주민등록번호 또는 사업자번호를 잘못입력하셨습니다") >= 0) ||
-            (ResultStr.indexOf("계좌번호또는주민등록(사업자)번호가일치하지않습니다") >= 0) ||
-            (ResultStr.indexOf("계좌번호 또는 주민등록(사업자)번호가 일치하지 않습니다") >= 0) ||
-            (ResultStr.indexOf("주민번호 또는 사업자 번호를 정확히 입력하십시오") >= 0) || // 아이디 틀릴때에도 동일한 메세지 나옴
-            (ResultStr.indexOf("주민등록번호가 다릅니다") >= 0) ||
-            (ResultStr.indexOf("본인명의의 계좌만 조회 및 거래가 가능합니다") >= 0)) { // 계좌번호, 계좌비밀번호, 사업자번호 오류 시 동일한 오류 메세지
-            this.setError(E_IBX_REGNO_RESIDENT_INVALID);
-            return E_IBX_REGNO_RESIDENT_INVALID;
-        }
+        // if ((ResultStr.indexOf("본인의 주민등록번호 또는 사업자번호를 잘못입력하셨습니다") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호또는주민등록(사업자)번호가일치하지않습니다") >= 0) ||
+        //     (ResultStr.indexOf("계좌번호 또는 주민등록(사업자)번호가 일치하지 않습니다") >= 0) ||
+        //     (ResultStr.indexOf("주민번호 또는 사업자 번호를 정확히 입력하십시오") >= 0) || // 아이디 틀릴때에도 동일한 메세지 나옴
+        //     (ResultStr.indexOf("주민등록번호가 다릅니다") >= 0) ||
+        //     (ResultStr.indexOf("본인명의의 계좌만 조회 및 거래가 가능합니다") >= 0)) { // 계좌번호, 계좌비밀번호, 사업자번호 오류 시 동일한 오류 메세지
+        //     this.setError(E_IBX_REGNO_RESIDENT_INVALID);
+        //     return E_IBX_REGNO_RESIDENT_INVALID;
+        // }
 
-        // 입력파라미터 오류(지금까지는 전부 아이디 오류였음)
-        if ((ResultStr.indexOf("[오류코드:Z491") >= 0) ||
-            (ResultStr.indexOf("업무처리 오류입니다") >= 0)) {
-            this.setError(E_IBX_USER_ACCOUNT_INVALID);
-            return E_IBX_USER_ACCOUNT_INVALID;
-        }
+        // // 입력파라미터 오류(지금까지는 전부 아이디 오류였음)
+        // if ((ResultStr.indexOf("[오류코드:Z491") >= 0) ||
+        //     (ResultStr.indexOf("업무처리 오류입니다") >= 0)) {
+        //     this.setError(E_IBX_USER_ACCOUNT_INVALID);
+        //     return E_IBX_USER_ACCOUNT_INVALID;
+        // }
 
-        if ((ResultStr.indexOf("고객아이디가 없거나") >= 0) ||
-            (ResultStr.indexOf("해지된 사용자 ID입니다") >= 0) ||
-            (ResultStr.indexOf("서브아이디로는 거래가 불가합니다") >= 0) ||
-            (ResultStr.indexOf("로그인하신 ID가 유효하지 않습니다") >= 0) ||
-            (ResultStr.indexOf("(UKFK0166)") >= 0) ||
-            (ResultStr.indexOf("사용자ID를 확인하여 입력해 주십시오") >= 0) ||
-            (ResultStr.indexOf("인터넷뱅킹ID는 영문과 숫자만 입력가능합니다.") >= 0) ||
-            (ResultStr.indexOf("ID를 확인하여 입력해") >= 0)) {
-            this.setError(E_IBX_KEY_ACCOUNT_INFO_2_INVALID);
-            return E_IBX_KEY_ACCOUNT_INFO_2_INVALID;
-        }
+        // if ((ResultStr.indexOf("고객아이디가 없거나") >= 0) ||
+        //     (ResultStr.indexOf("해지된 사용자 ID입니다") >= 0) ||
+        //     (ResultStr.indexOf("서브아이디로는 거래가 불가합니다") >= 0) ||
+        //     (ResultStr.indexOf("로그인하신 ID가 유효하지 않습니다") >= 0) ||
+        //     (ResultStr.indexOf("(UKFK0166)") >= 0) ||
+        //     (ResultStr.indexOf("사용자ID를 확인하여 입력해 주십시오") >= 0) ||
+        //     (ResultStr.indexOf("인터넷뱅킹ID는 영문과 숫자만 입력가능합니다.") >= 0) ||
+        //     (ResultStr.indexOf("ID를 확인하여 입력해") >= 0)) {
+        //     this.setError(E_IBX_KEY_ACCOUNT_INFO_2_INVALID);
+        //     return E_IBX_KEY_ACCOUNT_INFO_2_INVALID;
+        // }
 
-        if (ResultStr.indexOf("지연되고 있습니다.") >= 0) {
-            this.setError(E_IBX_SERVICE_SERVERBUSY);
-            return E_IBX_SERVICE_SERVERBUSY;
-        }
+        // if (ResultStr.indexOf("지연되고 있습니다.") >= 0) {
+        //     this.setError(E_IBX_SERVICE_SERVERBUSY);
+        //     return E_IBX_SERVICE_SERVERBUSY;
+        // }
 
-        if ((ResultStr.indexOf("비밀번호 3회이상오류") >= 0) ||
-            (ResultStr.indexOf("비밀번호 3회 오류입니다") >= 0)) {
-            this.setError(E_IBX_ACCOUNT_PASSWORD_JUSTBEFOREDENY);
-            return E_IBX_ACCOUNT_PASSWORD_JUSTBEFOREDENY;
-        }
+        // if ((ResultStr.indexOf("비밀번호 3회이상오류") >= 0) ||
+        //     (ResultStr.indexOf("비밀번호 3회 오류입니다") >= 0)) {
+        //     this.setError(E_IBX_ACCOUNT_PASSWORD_JUSTBEFOREDENY);
+        //     return E_IBX_ACCOUNT_PASSWORD_JUSTBEFOREDENY;
+        // }
 
-        if ((ResultStr.indexOf("회 오류입력되었습니다") >= 0) ||
-            (ResultStr.indexOf("회 오류 입력되었습니다") >= 0) ||
-            (ResultStr.indexOf("회 오류 입력 되었습니다") >= 0) ||
-            (ResultStr.indexOf("비밀번호 1회오류 등록") >= 0) || 
-            (ResultStr.indexOf("비밀번호 2회오류 등록") >= 0) ||
-            (ResultStr.indexOf("계좌 비밀번호 1회오류 및 2회오류가 등록되었습니다") >= 0)) {
-            this.setError(E_IBX_ACCOUNT_PASSWORD_INVALID);
-            return E_IBX_ACCOUNT_PASSWORD_INVALID;
-        }
+        // if ((ResultStr.indexOf("회 오류입력되었습니다") >= 0) ||
+        //     (ResultStr.indexOf("회 오류 입력되었습니다") >= 0) ||
+        //     (ResultStr.indexOf("회 오류 입력 되었습니다") >= 0) ||
+        //     (ResultStr.indexOf("비밀번호 1회오류 등록") >= 0) || 
+        //     (ResultStr.indexOf("비밀번호 2회오류 등록") >= 0) ||
+        //     (ResultStr.indexOf("계좌 비밀번호 1회오류 및 2회오류가 등록되었습니다") >= 0)) {
+        //     this.setError(E_IBX_ACCOUNT_PASSWORD_INVALID);
+        //     return E_IBX_ACCOUNT_PASSWORD_INVALID;
+        // }
 
-        if ((ResultStr.indexOf("비밀번호 4회 이상 오류") >= 0) ||
-            (ResultStr.indexOf("계좌 비밀번호가 4회 오류") >= 0)) {
-            this.setError(E_IBX_ACCOUNT_PASSWORD_DENIED);
-            return E_IBX_ACCOUNT_PASSWORD_DENIED;
-        }
+        // if ((ResultStr.indexOf("비밀번호 4회 이상 오류") >= 0) ||
+        //     (ResultStr.indexOf("계좌 비밀번호가 4회 오류") >= 0)) {
+        //     this.setError(E_IBX_ACCOUNT_PASSWORD_DENIED);
+        //     return E_IBX_ACCOUNT_PASSWORD_DENIED;
+        // }
 
-        if ((ResultStr.indexOf("서비스 장애 중 입니다.") >= 0) ||
-            (ResultStr.indexOf("사용자가 많아 잠시 후 이용하") >= 0) ||
-            (ResultStr.indexOf("은행 HOST쪽에 데이타 수신 오류입니다") >= 0) ||
-            (ResultStr.indexOf("일자 전환 중 잠시 후 거래하여 주시기 바랍니다.") >= 0) ||
-            (StrGrab(ResultStr, 'id="errCd">', '</').indexOf("CBN13000") >= 0)) {
-            this.setError(E_IBX_SITE_INTERNAL);
-            return E_IBX_SITE_INTERNAL;
-        }
+        // if ((ResultStr.indexOf("서비스 장애 중 입니다.") >= 0) ||
+        //     (ResultStr.indexOf("사용자가 많아 잠시 후 이용하") >= 0) ||
+        //     (ResultStr.indexOf("은행 HOST쪽에 데이타 수신 오류입니다") >= 0) ||
+        //     (ResultStr.indexOf("일자 전환 중 잠시 후 거래하여 주시기 바랍니다.") >= 0) ||
+        //     (StrGrab(ResultStr, 'id="errCd">', '</').indexOf("CBN13000") >= 0)) {
+        //     this.setError(E_IBX_SITE_INTERNAL);
+        //     return E_IBX_SITE_INTERNAL;
+        // }
 
-        if ((ResultStr.indexOf("(EMCITBC007)") >= 0) ||
-            (ResultStr.indexOf("지금은 일자전환 및 거래제한으로 인해 잠시 동안 서비스가 불가합니다") >= 0) ||
-            (ResultStr.indexOf("현재는 시스템 정기점검 작업 시간입니다") >= 0)) {
-            this.setError(E_IBX_SERVICE_NOTIME);
-            return E_IBX_SERVICE_NOTIME;
-        }
+        // if ((ResultStr.indexOf("(EMCITBC007)") >= 0) ||
+        //     (ResultStr.indexOf("지금은 일자전환 및 거래제한으로 인해 잠시 동안 서비스가 불가합니다") >= 0) ||
+        //     (ResultStr.indexOf("현재는 시스템 정기점검 작업 시간입니다") >= 0)) {
+        //     this.setError(E_IBX_SERVICE_NOTIME);
+        //     return E_IBX_SERVICE_NOTIME;
+        // }
 
-        if ((ResultStr.indexOf("휴면계좌") >= 0) ||
-            (ResultStr.indexOf("존재하지 않거나") >= 0)) {
-            this.setError(E_IBX_ACCOUNT_NO_MISC);
-            return E_IBX_ACCOUNT_NO_MISC;
-        }
+        // if ((ResultStr.indexOf("휴면계좌") >= 0) ||
+        //     (ResultStr.indexOf("존재하지 않거나") >= 0)) {
+        //     this.setError(E_IBX_ACCOUNT_NO_MISC);
+        //     return E_IBX_ACCOUNT_NO_MISC;
+        // }
 
-        if (ResultStr.indexOf('거래내역조회 신청이 불가능합니다') > -1) {
-            this.setError(E_IBX_ACCOUNT_NO_MISC);
-            this.iSASInOut.Output.ErrorMessage = "계좌번호가 올바르게 입력되었는지 확인해 주세요. CMS계좌, 증권통장, 중도금계좌, 아파트관리비통장, 가상계좌는 거래내역조회 신청이 불가능합니다.";
-            return E_IBX_ACCOUNT_NO_MISC;
-        }
+        // if (ResultStr.indexOf('거래내역조회 신청이 불가능합니다') > -1) {
+        //     this.setError(E_IBX_ACCOUNT_NO_MISC);
+        //     this.iSASInOut.Output.ErrorMessage = "계좌번호가 올바르게 입력되었는지 확인해 주세요. CMS계좌, 증권통장, 중도금계좌, 아파트관리비통장, 가상계좌는 거래내역조회 신청이 불가능합니다.";
+        //     return E_IBX_ACCOUNT_NO_MISC;
+        // }
 
-        // 개인고객 & 로그인 패스워드 오류초과
-        if ((ResultStr.indexOf("사용자암호가 3회 입력오류") >= 0) ||
-            (ResultStr.indexOf("사용자 암호가 3회 연속 오류") >= 0) ||
-            (ResultStr.indexOf("사용자 암호 오류 해제 후") >= 0) ||
-            (ResultStr.indexOf("사용자암호 3회 입력오류") >= 0)) {
-            this.setError(E_IBX_USER_PASSWORD_DENIED);
-            return E_IBX_USER_PASSWORD_DENIED;
-        }
+        // // 개인고객 & 로그인 패스워드 오류초과
+        // if ((ResultStr.indexOf("사용자암호가 3회 입력오류") >= 0) ||
+        //     (ResultStr.indexOf("사용자 암호가 3회 연속 오류") >= 0) ||
+        //     (ResultStr.indexOf("사용자 암호 오류 해제 후") >= 0) ||
+        //     (ResultStr.indexOf("사용자암호 3회 입력오류") >= 0)) {
+        //     this.setError(E_IBX_USER_PASSWORD_DENIED);
+        //     return E_IBX_USER_PASSWORD_DENIED;
+        // }
 
-        if (ResultStr.indexOf("조회가능한 예금종류가 아닙니다.") >= 0) {
-            this.setError(E_IBX_ACCOUNT_CLASS_INVALID);
-            return E_IBX_ACCOUNT_CLASS_INVALID;
-        }
+        // if (ResultStr.indexOf("조회가능한 예금종류가 아닙니다.") >= 0) {
+        //     this.setError(E_IBX_ACCOUNT_CLASS_INVALID);
+        //     return E_IBX_ACCOUNT_CLASS_INVALID;
+        // }
 
-        if (StrGrab(ResultStr, '<div id="errorDiv"', '">').indexOf('display:block') >= 0) {
-            this.setError(E_IBX_UNKNOWN);
-            return E_IBX_UNKNOWN;
-        }
+        // if (StrGrab(ResultStr, '<div id="errorDiv"', '">').indexOf('display:block') >= 0) {
+        //     this.setError(E_IBX_UNKNOWN);
+        //     return E_IBX_UNKNOWN;
+        // }
 
         system.setStatus(IBXSTATE_RESULT, 80);
 
@@ -405,6 +405,7 @@ var 빠른조회 = function() {
         this.iSASInOut.Output.ErrorMessage = "";
         this.iSASInOut.Output.Result = {};
 
+        this.iSASInOut.Output.Result.ResultStr = ResultStr;
         // 예금명
         this.iSASInOut.Output.Result.예금명 = StrGrab(StrGrab(ResultStr, ">계좌정보<", "</tr>"), "<td", "</td>");
         this.iSASInOut.Output.Result.예금명 = StrGrab(this.iSASInOut.Output.Result.예금명, ">", "");

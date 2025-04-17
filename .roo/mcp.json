@@ -1,15 +1,32 @@
 {
   "mcpServers": {
-    "firecrawl-mcp": {
-      "command": "cmd.exe",
-      "args": [
-        "/c",
-        "C:\\Program Files\\nodejs\\npx.cmd",
-        "-y",
-        "firecrawl-mcp"
-      ],
-      "env": {
-        "FIRECRAWL_API_KEY": "fc-464ae6dcc5894cc18602b339b8ededc1"
+    "form-inspector": {
+      "type": "local",
+      "command": "node tools/server.js",
+      "tools": {
+        "run_form_inspector": {
+          "endpoint": "http://localhost:54321/run",
+          "method": "POST",
+          "description": "Submit a form using Playwright automation",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string", "description": "URL of the form page" },
+              "formSelector": { "type": "string", "description": "CSS selector for the form submit button" },
+              "fields": {
+                "type": "object",
+                "description": "Key-value pairs of field selectors and values"
+              }
+            },
+            "required": ["url", "formSelector", "fields"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "properties": {
+              "status": { "type": "string" }
+            }
+          }
+        }
       }
     }
   }

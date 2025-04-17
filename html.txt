@@ -1,153 +1,247 @@
-<!DOCTYPE html><html dir="ltr" lang="en" xml:lang="en" class="yui3-js-enabled">
-<body id="page-mod-ubboard-view" class="format-site path-mod path-mod-ubboard chrome dir-ltr lang-en yui-skin-sam yui3-skin-sam lms-chungbuk-ac-kr pagelayout-base course-1 context-51 cmid-17 notloggedin coursemos-layout-course coursemos-headroom-pin jsenabled coursemos-page-xl">
+<!DOCTYPE html><html lang="ko">
 
-	<div id="page">
-
-	    <div>
-    <a class="sr-only sr-only-focusable" href="https://lms.chungbuk.ac.kr/mod/ubboard/view.php?id=17#maincontent">Skip to main content</a>
-</div>
+    
+    <!-- <script type="text/javascript" src="/js/sp/main/main_1002_01.js"></script> -->
+    
 
 
 
+<body>
+<form id="frm" name="frm" method="post">
+    <input type="hidden" id="INC_SRCH_WD2" name="INC_SRCH_WD2">
+    <!-- 검색어 -->
+    <input type="hidden" id="CTG_SRCH_WD" name="CTG_SRCH_WD" value="">
+    <!-- 카테고리 링크  -->
+    <input type="hidden" id="APL_SRCH_WD" name="APL_SRCH_WD" value="">
+    <!-- 적용사례 링크  -->
+</form>
+<div class="wrap">
+    <!-- (start)20240617 -->
+    <div class="section_grp">
+    <!-- //(end)20240617 -->
+        
 
+        <hr>
 
+        <div class="sectSub_top">
+            <div class="sectSub_inner">
+                <div class="srcTop_wrap">
+                    <div class="srcTop_inner">
+                        <h2 class="tit_h2">API 상품</h2>
+                        <div class="apiSrBx pdb80">
+                            <!-- 로딩 -->
+                            <div class="laoding_wrap" style="display: none">
+                                <div class="lds-spinner">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <!-- //로딩 -->
+                            <div class="apiSrBx_inner">
+                                <div class="inner">
+                                    <label for=""> <input type="text" id="SRCH_KWR" onkeypress="search_keypress(event.keyCode);" placeholder="상품을 찾아보세요" value=""> <input type="hidden" id="SRCH_KWR2" value="">
+                                        <a id="searchTextDel" class="bt_close"><span class="blind">삭제</span></a>
+                                    </label>
+                                    <div class="right">
+                                        <a class="btn_srch"><span class="blind">검색</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apiSrc_list subPage style2">
+                                <div class="inner">
+                                    <ul id="api_recommend">
+                                        <!--
+                                        <li><a href="javascript:;"><span>#마이데이터</span></a></li>
+                                        <li><a href="javascript:;"><span>#간편결제</span></a></li>
+                                        <li><a href="javascript:;"><span>#인슈어테크</span></a></li>
+                                        <li><a href="javascript:;"><span>#사무자동화</span></a></li>
+                                     -->
+                                    </ul>
+                                </div>
+                            </div>
 
+                            <!-- (start)20240613 -->
+                            <div class="apiFilter_grp mgt60">
+                                <div class="apiFilter_grp_inner">
+                                    <div class="apiFilter_tab_area js_tab_wrap">
+                                        <div class="tab tabHead">
+                                            <ul>
+                                                <li class="js_tab_click on"><a href="javascript:;"><span>API종류로 찾기</span></a></li>
+                                                <li class="js_tab_click"><a href="javascript:;"><span>업무로 추천 받기</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tabBody">
+                                            <!-- API종류로찾기 -->
+                                            <div class="tab_cnt_wrap js_tab_show" style="display:;">
+                                                <!-- 카테고리 -->
+                                                <div class="filter_areaBox">
+                                                    <div class="filter_areaBox_title">
+                                                        <div class="left">
+                                                            <h4>상품의 <strong>카테고리</strong>를 선택해 보세요</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="filter_areaBox_cnt">
+                                                        <div class="list_category" id="listAllCategory">
+                                                            <div class="row">
+                                                                <dl>
+                                                                    <dt>
+                                                                        <p>데이터 API</p>
+                                                                    </dt>
+                                                                    <dd>
+                                                                        <ul id="dataApiList">
+                                                                            <li class="apiAll"><a href="javascript:;" id="dataApiAll">전체</a></li>
+                                                                            <li><a href="javascript:;">개인정보<br>(마이데이터)</a></li>
+                                                                            <li><a href="javascript:;">비대면 서류제출</a></li>
+                                                                            <li><a href="javascript:;">자금관리</a></li>
+                                                                            <li><a href="javascript:;">사업자정보</a></li>
+                                                                            <li><a href="javascript:;">자동차</a></li>
+                                                                            <li><a href="javascript:;">부동산</a></li>
+                                                                            <li><a href="javascript:;">헬스케어</a></li>
+                                                                        </ul>
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="row">
+                                                                <dl>
+                                                                    <dt>
+                                                                        <p>페이먼트 API</p>
+                                                                    </dt>
+                                                                    <dd>
+                                                                        <ul id="paymentApiList">
+                                                                            <li class="apiAll"><a href="javascript:;" id="paymentApiAll">전체</a></li>
+                                                                            <li><a href="javascript:;">인증/보안</a></li>
+                                                                            <li><a href="javascript:;">펌뱅킹(이체/조회)</a></li>
+                                                                            <li><a href="javascript:;">가상계좌</a></li>
+                                                                            <li><a href="javascript:;">간편결제</a></li>
+                                                                            <li><a href="javascript:;">ATM입출금</a></li>
 
+                                                                        </ul>
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="row">
+                                                                <dl>
+                                                                    <dt>
+                                                                        <p>글로벌 API</p>
+                                                                    </dt>
 
+                                                                    <dd>
+                                                                        <ul id="globalApiList">
+                                                                            <li class="apiAll"><a href="javascript:;" id="globalApiAll">전체</a></li>
+                                                                            <li><a href="javascript:;">아시아</a></li>
+                                                                            <li><a href="javascript:;">유럽</a></li>
+                                                                            <li><a href="javascript:;">중동/아프리카</a></li>
+                                                                            <li><a href="javascript:;">아메리카</a></li>
+                                                                            <li><a href="javascript:;">오세아니아</a></li>
 
-	    
-
-	    <div id="page-container">
-	    	
-
-			<div id="page-content">
-				<div class="page-content-navigation">
-					
-
-				</div>
-				<div class="page-content-container">
-					<span class="notifications" id="user-notifications"></span>
-					<div role="main"><span id="maincontent"></span><h2>공지사항</h2>
-
-
-<div class="ubboard">
-
-		<div class="card card-body mb-3">
-			<div class="paging-info text-md-right form-inline mb-3">
-                <div class="form-group">
-                    <div class="form-control-plaintext mr-3">
-                        Total Count : <span class="text-warning">31</span>
+                                                                        </ul>
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <div class="form-control-plaintext mr-3">
-                        Total Page : <span class="text-success">1 / 3</span>
+        <hr>
+
+        <div class="container" style="min-height: 0px;">
+            <div class="content">
+                <div class="sect bg_f5f7f9">
+                    <div class="sect_inner">
+                        <div class="apiProduct_page">
+                            <div class="srchResult_wrap">
+                                <div class="srchResult_inner">
+                                    <div class="left">
+                                        <p id="keywordCount" class="srchTotal">
+                                            <strong class="srch_keyword"></strong><span>검색결과</span>
+                                            <strong class="mgl8">184</strong><span>건</span>
+                                        </p>
+                                    </div>
+                                    <div class="right">
+                                        <div class="meta_list">
+                                            <ul>
+                                                <li class="on" id="sortRecommend"><a href="javascript:;">추천순</a></li>
+                                                <li id="sortHot"><a href="javascript:;">인기순</a></li>
+                                                <li id="sortNew"><a href="javascript:;">신규순</a></li>
+                                                <li id="sortKor"><a href="javascript:;">가나다순</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="mgb34" style="display:;">
+                            <div class="recCase_wrap" id="powerProductDisplay">
+                                <div class="recCase_inner">
+                                    <ul id="getPowerProduct" class="mgt0">
+                                        <li>
+                                            <div class="bx_cnt">
+                                                <a>
+                                                    <div class="listBx_text">
+                                                        <h4>We-Check(모바일 증명서 조회)</h4>
+                                                        <p>공공기관의 다양한 증명서를 별도의 앱 설치 없이<br>모바일 웹에서 실시간으로 조회합니다</p>
+                                                        <div class="btn"><span class="tx_more">자세히보기</span></div>
+                                                    </div>
+                                                    <div class="listBx_img"><img src="https://www.coocon.net/file/att_file/20231102_fbbe889b-0d70-407c-b757-691f7862a38a.png" alt="We-Check(모바일 증명서 조회)"></div>
+                                                </a>
+                                                <div class="bookmark"><a href="javascript:;" class="bt_bookmark "><span class="blind">북마크</span></a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="api_product_new subPage">
+                            <div class="api_subPage_wrap">
+                                <div class="api_subPage_inner">
+                                    <ul id="getDat">
+                                        <li name="li_list">
+                                            <div class="bx_cnt">
+                                                <a class="bx_slide">
+                                                    <span class="ic_label ic_labelNEW">NEW</span>
+                                                    <h4>여권정보증명서 발급</h4>
+                                                    <p>여권 정보와 전체 주민등록번호가 기재된<br>여권정보증명서와 PDF 파일을 제공합니다</p>
+                                                    <div class="ic_wrap"><img src="https://www.coocon.net/renewal/img/ic/ic_service_09.png" alt=""></div>
+                                                </a>
+                                                <div class="bookmark"><a href="javascript:;" class="bt_bookmark "><span class="blind">북마크</span></a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <select name="ls" class="form-control form-control-ls form-control-sm">
-                    <option value="15" selected="&quot;selected&quot;">15</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-			</div>
-
-			<div class="lists">
-				<form id="ubboard-list-form" method="post" action="action.php">
-					<div class="table-responsive">
-						<table class="table table-bordered table-coursemos table-ubboard-list">
-							<colgroup>
-				
-								<col class="wp-50">
-				
-				
-				
-				
-								<col>
-								<col class="wp-120">
-								<col class="wp-70">
-							</colgroup>
-							<thead>
-								<tr>
-				
-									<th class="text-center t-number">No.</th>
-				
-				
-				
-				
-									<th class="t-subject">Subject</th>
-									<th class="text-center t-date">Date Created</th>
-									<th class="text-center t-viewcount">Views</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="">
-				
-									<td class="text-center t-number">
-										<img src="https://lms.chungbuk.ac.kr/theme/image.php/coursemos/ubboard/1744658108/icon/notice" alt="notice">
-									</td>
-				
-				
-				
-				
-									<td class="t-subject">
-				
-										<a href="https://lms.chungbuk.ac.kr/mod/ubboard/article.php?keyfield&amp;keyword&amp;ls=15&amp;page=1&amp;categoryid&amp;bwid=61686&amp;id=17">
-				
-				                        
-										AI 기반 개인 맞춤형 학습지원시스템 안내
-				
-										</a>
-				
-				
-											<img src="https://lms.chungbuk.ac.kr/theme/image.php/coursemos/ubboard/1744658108/icon/disk" alt="file">
-				
-									</td>
-									<td class="text-center t-date"><span title="2025-04-02 16:21:32">2025-04-02</span></td>
-									<td class="text-center t-viewcount">
-				                            13342
-				                    </td>
-								</tr>
-								<tr class="">
-				
-									<td class="text-center t-number">
-										<img src="https://lms.chungbuk.ac.kr/theme/image.php/coursemos/ubboard/1744658108/icon/notice" alt="notice">
-									</td>
-				
-				
-				
-				
-									<td class="t-subject">
-				
-										<a href="https://lms.chungbuk.ac.kr/mod/ubboard/article.php?keyfield&amp;keyword&amp;ls=15&amp;page=1&amp;categoryid&amp;bwid=58605&amp;id=17">
-				
-				                        
-										강의 동영상 시청 시 주의사항 안내
-				
-										</a>
-				
-				
-				
-									</td>
-									<td class="text-center t-date"><span title="2025-03-17 10:53:43">2025-03-17</span></td>
-									<td class="text-center t-viewcount">
-				                            17233
-				                    </td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</form>
-			</div>
-		</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

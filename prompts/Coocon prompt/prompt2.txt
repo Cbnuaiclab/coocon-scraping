@@ -1,0 +1,25 @@
+Use browser_action to launch a browser at the login page https://www.coocon.net.
+
+Click on "데이터 API" card to access all cases. Then use Firecrawl mcp tool to scrape the API product lists from https://www.coocon.net/main_1002_01.act?CATG_SRNO=KOR_001_101_000 and save it in html.txt. 
+
+Network Analysis:
+Use the announcement URL to extract the data and analyze all network requests, parameters, and form-data structures to understand the site's communication patterns.
+
+Then write the business logic implementation for the // __Business_Logic__ section, do not engage the // __DATA_EXTRACTION__  section in the newly created __WEBSITE_NAME__.js file:
+
+1. Locate the comment marker // __Business_Logic__ in the __WEBSITE_NAME__.js file
+2. Replace this marker with a complete implementation that follows the workflow_template.txt pattern. Use iSASTypes.js to handle error exceptions.
+
+IMPORTANT: When implementing the business logic, determine whether login is required for the website:
+
+- If login IS required:
+  * Follow the "SCENARIO 1: IF LOGIN IS NEEDED" section in workflow_template.txt
+  * Implement Steps 1-3 for login process, then proceed with data retrieval
+
+- If login is NOT required:
+  * Follow the "SCENARIO 2: IF LOGIN IS NOT NEEDED" section in workflow_template.txt
+  * Skip Steps 1-3 and directly access the target page
+  * Still maintain proper status updates using system.setStatus()
+  * Handle errors appropriately using this.setError()
+
+The implementation should be robust, handling both successful and error scenarios appropriately. Always check the network requests captured during browser analysis to understand the exact parameters and endpoints needed.

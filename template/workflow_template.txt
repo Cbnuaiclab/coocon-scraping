@@ -6,7 +6,10 @@
  */
         __Business_Logic__
         var input = dec(aInput.Input);
-
+        
+        //** SCENARIO 1: IF LOGIN IS NEEDED **
+        
+        // Step 1: Declare variable
         var username = input.username;  // account number
         var password = input.password; // account password
 
@@ -28,6 +31,7 @@
         this.postData += "&" + httpRequest.URLEncode("조회유형", "UTF-8") + "=" + httpRequest.URLEncode("사업자번호", "UTF-8");
 
         // Step 3: Send POST request to login
+        system.setStatus(IBXSTATE_LOGIN, 30);
         if (!httpRequest.post(this.host + this.url, this.postData, "application/x-www-form-urlencoded")) {
             this.setError(E_IBX_FAILTOGETPAGE);
             return E_IBX_FAILTOGETPAGE;
@@ -41,5 +45,41 @@
             return E_IBX_FAILTOGETPAGE;
         }
         this.log("Current URL after login: [" + currentUrl + "]");
+        
+        ResultStr = httpRequest.result;
+        
+        //** SCENARIO 2: IF LOGIN IS NOT NEEDED **
+        
+        // Step 1: Directly access the target page
+        system.setStatus(IBXSTATE_EXECUTE, 50);
+        this.url = "/main_1002_01.act?CATG_SRNO=KOR_001_101_000"; // Replace with the actual target URL
+        if (!httpRequest.get(this.host + this.url)) {
+            this.setError(E_IBX_FAILTOGETPAGE);
+            return E_IBX_FAILTOGETPAGE;
+        }
+        
+        // Step 2: Process the result
+        system.setStatus(IBXSTATE_RESULT, 70);
+        ResultStr = httpRequest.result;
+        this.log("Target Page Content: [" + ResultStr.substring(0, 200) + "...]");
+        
+        // Step 3: If additional navigation is needed
+        // Example: Navigate to a specific section or perform a search
+        this.url = "/specific_section.act";
+        if (!httpRequest.get(this.host + this.url)) {
+            this.setError(E_IBX_FAILTOGETPAGE);
+            return E_IBX_FAILTOGETPAGE;
+        }
+        
+        // Step 4: If form submission is needed without login
+        // Example: Search form or filter form
+        this.postData = "";
+        this.postData += httpRequest.URLEncode("searchKeyword", "UTF-8") + "=" + httpRequest.URLEncode("search_term", "UTF-8");
+        this.postData += "&" + httpRequest.URLEncode("category", "UTF-8") + "=" + httpRequest.URLEncode("filter_value", "UTF-8");
+        
+        if (!httpRequest.post(this.host + "/search.act", this.postData, "application/x-www-form-urlencoded")) {
+            this.setError(E_IBX_FAILTOGETPAGE);
+            return E_IBX_FAILTOGETPAGE;
+        }
         
         ResultStr = httpRequest.result;

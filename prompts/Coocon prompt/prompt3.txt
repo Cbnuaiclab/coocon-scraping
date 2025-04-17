@@ -1,0 +1,25 @@
+Implement the data extraction and cleaning functionality for the // __DATA_EXTRACTION__ section in the __WEBSITE_NAME__.js file:
+
+1. Locate the comment marker // __DATA_EXTRACTION__ in the __WEBSITE_NAME__.js file
+2. Use the data_extraction_template.txt file as the pattern for your implementation
+3. Parse the HTML content from html.txt to extract the following information from list of card:
+   - title
+   - description 
+
+Your implementation should follow the extraction pattern shown in data_extraction_template.txt while adapting it to handle the specific structure of the HTML in html.txt. The extracted data should be clean, consistent, and properly structured for further processing.
+
+IMPORTANT NOTE FOR BUSINESS LOGIC IMPLEMENTATION:
+When implementing the business logic section, consider whether login is required:
+
+1. If login is required:
+   - Follow Steps 1-3 in the workflow_template.txt for login process
+   - Then proceed with Steps 4+ for data retrieval
+
+2. If login is NOT required:
+   - Skip Steps 1-3 in the workflow_template.txt
+   - Directly access the target page using httpRequest.get()
+   - Process the results and perform any additional navigation or form submissions as needed
+   - Always maintain proper status updates using system.setStatus()
+   - Handle errors appropriately using this.setError()
+
+The workflow_template.txt has been updated with examples for both scenarios. Use the appropriate section based on whether login is required for the specific website.

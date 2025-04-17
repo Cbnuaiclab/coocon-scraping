@@ -1,0 +1,10 @@
+Use Firecrawl mcp tool to scrape html structure of 학부공지 table via url: https://mis.chungbuk.ac.kr/?pg_idx=7 and save it in html.txt. Using iSASTypes.js to handle error exception.
+
+Network Analysis:
+Use the announcement URL to extract the data and analyze all network requests, parameters, and form-data structures to understand the site's communication patterns.
+
+Then write the business logic implementation for the // __Business_Logic__ section, do not engage the // __DATA_EXTRACTION__  section in the newly created __WEBSITE_NAME__.js file:
+
+1. Locate the comment marker // __Business_Logic__ in the __WEBSITE_NAME__.js file
+2. Replace this marker with a complete implementation that follows the workflow.txt template pattern
+

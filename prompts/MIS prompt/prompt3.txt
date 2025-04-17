@@ -1,0 +1,11 @@
+Implement the data extraction and cleaning functionality for the // __DATA_EXTRACTION__ section in the __WEBSITE_NAME__.js file:
+
+1. Locate the comment marker // __DATA_EXTRACTION__ in the __WEBSITE_NAME__.js file
+2. Use the data_extraction_template.txt file as the pattern for your implementation
+3. Parse the HTML content from html.txt to extract the following information:
+   - 순서
+   - 제목
+   - 작성자
+   - 작성일
+   - 조회수
+Your implementation should follow the extraction pattern shown in data_extraction_template.txt while adapting it to handle the specific structure of the HTML in html.txt. The extracted data should be clean, consistent, and properly structured for further processing.
